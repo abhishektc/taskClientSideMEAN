@@ -1,0 +1,27 @@
+<div class="container" style="padding-top: 5%;padding-bottom: 5%;">
+
+    <div class="row" *ngIf="showManagerBoard; else block">
+        <div class="col-sm-6">
+            <div class="card">
+                <a routerLink="/createTask">
+                    <div class="card-body" style="display: flex; justify-content: center;cursor: pointer;">
+                        <h5 class="card-title">Create Task</h5>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <a routerLink="/taskList">
+                    <div class="card-body" style="display: flex; justify-content: center;cursor: pointer;">
+                        <h5 class="card-title">Task List</h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <ng-template #block>
+        <app-assigned-task></app-assigned-task>
+    </ng-template>
+</div>

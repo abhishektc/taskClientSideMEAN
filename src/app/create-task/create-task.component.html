@@ -1,0 +1,72 @@
+<div class="container" style="padding-top: 5%;">
+    <div class="card" style="padding: 5px;">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h3 style="display: flex; justify-content: center;">Create Task</h3>
+                <div class="alert alert-success" *ngIf="isTaskCreated">
+                    <strong>{{message}}</strong>
+                </div>
+                <div class="alert alert-danger" *ngIf="isError">
+                    <strong>{{errorMessage}}</strong>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form [formGroup]="createTask" (ngSubmit)="task(createTask)" name="form" role="form">
+                    <div class="form-group">
+                        <label class="form-control-label" for="taskName">Task Name</label>
+                        <input type="text" class="form-control" id="taskName" name="taskName"
+                            formControlName="taskName">
+                        <div
+                            *ngIf="createTask.controls.taskName.errors && (createTask.controls.taskName.touched || createTask.controls.taskName.dirty)">
+                            <div style="color: red;" *ngIf="createTask.hasError('required','taskName')">
+                                Task Name is Required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="taskDetails">Task Details</label>
+                        <textarea type="date" class="form-control" id="taskDetails" name="taskDetails"
+                            formControlName="taskDetails"></textarea>
+                        <div
+                            *ngIf="createTask.controls.taskDetails.errors && (createTask.controls.taskDetails.touched || createTask.controls.taskDetails.dirty)">
+                            <div style="color: red;" *ngIf="createTask.hasError('required','taskDetails')">
+                                Task Details is Required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="deadLine">DeadLine</label>
+                        <input type="date" class="form-control" id="deadLine" name="deadLine" placeholder="deadLine"
+                            formControlName="deadLine">
+                        <div
+                            *ngIf="createTask.controls.deadLine.errors && (createTask.controls.deadLine.touched || createTask.controls.deadLine.dirty)">
+                            <div style="color: red;" *ngIf="createTask.hasError('required','deadLine')">
+                                DeadLine is Required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="employee">Assaign task to Employee</label>
+                        <select class="form-control" id="employee" name="employee" formControlName="employee">
+                            <option></option>
+                            <option *ngFor="let item of data" value="{{item._id}}" >{{item.name}}</option>
+                        </select>
+                        <div
+                        *ngIf="createTask.controls.employee.errors && (createTask.controls.employee.touched || createTask.controls.employee.dirty)">
+                        <div style="color: red;" *ngIf="createTask.hasError('required','employee')">
+                            Please select an employee to assign task
+                        </div>
+                    </div>
+                    </div>
+                    <div style="display: flex;justify-content: center;align-items: center;">
+                        <button type="submit" class="btn btn-primary" [disabled]="!createTask.valid">Create</button>
+                    </div>
+                    <br><br>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

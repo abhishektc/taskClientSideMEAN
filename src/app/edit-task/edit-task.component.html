@@ -1,0 +1,59 @@
+<div class="container" style="padding-top: 5%;">
+    <div class="card" style="padding: 5px;">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h3 style="display: flex; justify-content: center;">Update Task</h3>
+                <div class="alert alert-success" *ngIf="isTaskUpdated">
+                    <strong>{{message}}</strong>
+                </div>
+                <div class="alert alert-danger" *ngIf="isError">
+                    <strong>{{errorMessage}}</strong>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form [formGroup]="updateTask" (ngSubmit)="task(updateTask)" name="form" role="form">
+                    <div class="form-group">
+                        <label class="form-control-label" for="taskName">Task Name</label>
+                        <input type="text" class="form-control" id="taskName" name="taskName"
+                            formControlName="taskName">
+                        <div
+                            *ngIf="updateTask.controls.taskName.errors && (updateTask.controls.taskName.touched || updateTask.controls.taskName.dirty)">
+                            <div style="color: red;" *ngIf="updateTask.hasError('required','taskName')">
+                                Task Name is Required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="taskDetails">Task Details</label>
+                        <textarea type="date" class="form-control" id="taskDetails" name="taskDetails"
+                            formControlName="taskDetails"></textarea>
+                        <div
+                            *ngIf="updateTask.controls.taskDetails.errors && (updateTask.controls.taskDetails.touched || updateTask.controls.taskDetails.dirty)">
+                            <div style="color: red;" *ngIf="updateTask.hasError('required','taskDetails')">
+                                Task Details is Required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="deadLine">DeadLine</label>
+                        <input type="date" class="form-control" id="deadLine" name="deadLine" placeholder="deadLine"
+                            formControlName="deadLine">
+                        <div
+                            *ngIf="updateTask.controls.deadLine.errors && (updateTask.controls.deadLine.touched || updateTask.controls.deadLine.dirty)">
+                            <div style="color: red;" *ngIf="updateTask.hasError('required','deadLine')">
+                                DeadLine is Required
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex;justify-content: center;align-items: center;">
+                        <button type="submit" class="btn btn-primary" [disabled]="!updateTask.valid">UPDATE</button>
+                    </div>
+                    <br><br>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

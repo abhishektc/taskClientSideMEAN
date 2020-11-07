@@ -1,0 +1,10 @@
+<div class="list-group" *ngIf="task.length > 0; else elseBlock">
+  <div class="list-group-item list-group-item-action" *ngFor="let item of task">
+    <app-notes-form [data]="item"></app-notes-form>
+  </div>
+</div>
+<ng-template #elseBlock>
+  <div style="display: flex;justify-content: center;align-items: center;">
+    <h6>No task assaigned to you</h6>
+  </div>
+</ng-template>

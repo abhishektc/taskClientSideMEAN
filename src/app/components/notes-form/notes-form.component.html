@@ -1,0 +1,37 @@
+<div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">{{data.taskName}}</h5>
+    <app-timer [time]="data.deadLine"></app-timer>
+</div>
+<p class="mb-1">{{data.taskDetails}}</p>
+<h6 style="display: flex; justify-content: center;">Update task Progress</h6>
+<div class="progress">
+    <div class="progress-bar" title="{{data.taskCompleted}}% Task Completed" role="progressbar"
+        [ngStyle]="{width: data.taskCompleted +'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<form [formGroup]="taskProgressUpdate" (ngSubmit)="taskProgress(taskProgressUpdate, data._id, data.deadLine)"
+    name="form" role="form">
+    <div class="form-group">
+        <label class="form-control-label" for="taskNote">About task completed</label>
+        <textarea type="date" class="form-control" id="taskNote" name="taskNote" formControlName="taskNote"></textarea>
+        <div
+            *ngIf="taskProgressUpdate.controls.taskNote.errors && (taskProgressUpdate.controls.taskNote.touched || taskProgressUpdate.controls.taskNote.dirty)">
+            <div style="color: red;" *ngIf="taskProgressUpdate.hasError('required','taskNote')">
+                Task Note is Required
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="form-control-label" for="taskCompleted">Task Completed(in % out of 100%)</label>
+        <input type="text" class="form-control" id="taskCompleted" name="taskCompleted" formControlName="taskCompleted">
+        <div
+            *ngIf="taskProgressUpdate.controls.taskCompleted.errors && (taskProgressUpdate.controls.taskCompleted.touched || taskProgressUpdate.controls.taskCompleted.dirty)">
+            <div style="color: red;" *ngIf="taskProgressUpdate.hasError('required','taskCompleted')">
+                Task completed is Required
+            </div>
+            <div style="color: red;" *ngIf="taskProgressUpdate.hasError('pattern','taskCompleted')">
+                Task completed is must be 1 to 100
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!taskProgressUpdate.valid">UPDATE PROGRESS</button>
+</form>
